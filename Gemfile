@@ -6,3 +6,5 @@ gem 'rails', '~> 5.0.1'
 gem 'puma', '~> 3.0'
 
 gem 'listen'
+
+gem 'rack-app_status', require: 'rack/app_status', git: 'git@github.com:mdsol/rack-app_status.git', tag: '0.1.5'

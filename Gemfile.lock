@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:mdsol/rack-app_status.git
+  revision: 42161475209b19c64c0e13216b5194c183509828
+  tag: 0.1.5
+  specs:
+    rack-app_status (0.1.5)
+      activesupport
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -116,6 +125,7 @@ PLATFORMS
 DEPENDENCIES
   listen
   puma (~> 3.0)
+  rack-app_status!
   rails (~> 5.0.1)
 
 BUNDLED WITH
