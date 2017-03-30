@@ -1,0 +1,34 @@
+<% require 'monitor_wares/config/template_helpers' %>
+<% extend MonitorWares::TemplateHelpers %>
+default: &default
+  common:
+    service_name: "<%= configured.service_name || guess_app_name(configured.domain!) %>"
+    release:      "<%= configured.release      || `git describe --abbrev=0 --tags`.to_s.chomp %>"
+
+  app_status:
+    sensors: "<%= configured.app_status_sensors || 'simple' %>"
+
+  zipkin_tracer:
+    json_api_host: "<%= configured.zipkin_api_url %>"
+    service_port: <%= configured.http_port || 80 %>
+    sample_rate: <%= configured.zipkin_sample_rate || 0.1 %>
+    sampled_as_boolean: <%= configured.zipkin_sampled_as_boolean || false %>
+    excluded_paths: "<%= configured.zipkin_excluded_paths || '/app_status, /assets, /smoke_test' %>"
+
+production:
+  <<: *default
+  logging:
+    log_to_stdout: <%= configured.log_to_stdout || false %>
+    log_to_file: <%= configured.log_to_file || true %>
+
+development:
+  <<: *default
+  logging:
+    log_to_stdout: <%= configured.log_to_stdout || true %>
+    log_to_file: <%= configured.log_to_file || true %>
+
+test:
+  <<: *default
+  logging:
+    log_to_stdout: <%= configured.log_to_stdout || false %>
+    log_to_file: <%= configured.log_to_file || true %>
